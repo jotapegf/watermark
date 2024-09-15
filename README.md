@@ -1,23 +1,21 @@
-# Watermark!
+# Watermark
 Um aplicativo em Flutter que grava um vídeo de 10 segundos (com imagem e áudio) a partir da câmera, adiciona uma marca d'água a ele e o reproduz.
 
-## Planejamento e confecção
-Primeiramente, fiz um brainstorm de como será a organização do aplicativo, isto é, como será a aparência da homepage, quantos botões, textos terá, etc... Desenhei em um papel como será a UI que vou programar.  
+## Planejamento e Desenvolvimento
+Inicialmente, fiz um brainstorm para organizar o aplicativo. Defini a aparência da homepage, o número de botões, textos, e outros elementos da interface. Esbocei no papel a interface de usuário (UI) que seria programada.
 
-Após isso, pensei que seria interessante para o usuário poder escolher qual será a marca d'agua a ser colocada no vídeo. Pra isso, utilizei o image_picker plugin for Flutter. Escolhi esse plugin, pois já tinha trabalhado 
-com ele e já tinha familiaridade com sua usabilidade. Após escolhermos a imagem da galeria, ela é exibida em um círculo, como se fosse uma 'preview'.  
+Em seguida, pensei que seria interessante permitir ao usuário escolher a marca d'água a ser aplicada no vídeo. Para isso, utilizei o plugin `image_picker` do Flutter. Optei por esse plugin devido à familiaridade que já tinha com ele. Após o usuário selecionar a imagem da galeria, ela é exibida como um "preview" em um formato circular.
 
-O próximo passo, foi adicionar a funcionalidade de gravar o vídeo em si. A ideia é que primeiro escolhamos a marca d'água, depois gravamos o vídeo.  
-É interessante que o usuário possa ver o vídeo gravado para decidir se quer adicionar a marca d'água naquele vídeo, ou gravar outro.  
-Ao clicar no botão 'Gravar vídeo' a camera do celular é aberta, e podemos gravar o vídeo. após concluir a gravação, o vídeo é reproduzido no aplicativo.   
-Foi adiocionado a opção de pausar, dar play, e reiniciar o vídeo no app.  
-Para essa etapa, foi utilizado os pacotes image_picker para gravar o vídeo, e o pacote video_player para reproduzir o vídeo.  
-Escolhi novamente o image_picker, pois ele já estava sendo utilizado no projeto, já tinha familiaridade com ele, e pesquisando, descobri que ele também tinha funcionalidades para gravação de vídeo.  
-Já o video_player foi escolhido pois é feito oficialmente pela equipe do Flutter e é o mais bem avaliado da categoria no site pub.dev.
+O próximo passo foi implementar a funcionalidade de gravação de vídeo. A ideia é que o usuário escolha a marca d'água primeiro e, em seguida, grave o vídeo. O usuário também pode visualizar o vídeo gravado e decidir se deseja aplicar a marca d'água ou gravar outro vídeo.
 
-O próximo passo será implementar um botão para processar o vídeo gravado com a marca d'água escolhida. No entanto, venho enfrentando muitas dificuldades ao usar pacotes que usam qualquer subpacote com ffmpeg. Todos que utilizei não deram certo. e o erro é o mesmo: A problem occurred configuring project ':flutter_ffmpeg'.
-> Could not create an instance of type com.android.build.api.variant.impl.LibraryVariantBuilderImpl
-Para o processamento do vídeo, encontrei um pacote simples e eficaz para o objetivo do projeto, no entando, ele utiliza ffmpeg para o processamento do vídeo.
-O pacote em questão é o video_watermark: ^1.0.5. Sua implementação e usabilidade se mostrou bem simples e rápida.
-Até o momento, não consegui avanços no que diz respeito a usar pacotes com ffmpeg para o processamento do vídeo, por conta do erro aqui relatado. Sigo pesquisando e procurando soluções.
+Ao clicar no botão "Gravar Vídeo", a câmera do celular é aberta, e o vídeo é gravado. Após a gravação, o vídeo é reproduzido no aplicativo. Foram adicionadas opções de pausar, dar play e reiniciar o vídeo. Para isso, utilizei os pacotes `image_picker` para a gravação e `video_player` para a reprodução do vídeo. 
 
+Escolhi o `image_picker` por já estar sendo usado no projeto e por oferecer suporte à gravação de vídeos. O `video_player` foi escolhido por ser mantido oficialmente pela equipe do Flutter e ser o mais bem avaliado na categoria, de acordo com o site pub.dev.
+
+## Próximos Passos
+O próximo passo é implementar um botão que processe o vídeo gravado com a marca d'água escolhida. No entanto, estou enfrentando dificuldades ao usar pacotes que dependem do FFmpeg. Todos que tentei até agora resultaram no seguinte erro:
+
+**"A problem occurred configuring project ':flutter_ffmpeg'.
+> Could not create an instance of type com.android.build.api.variant.impl.LibraryVariantBuilderImpl"**
+
+Para o processamento do vídeo, encontrei um pacote simples e eficaz chamado `video_watermark` (versão ^1.0.5), que utiliza o FFmpeg para processar o vídeo. Apesar de sua implementação ser simples e rápida, ainda não consegui resolver os problemas relacionados ao uso do FFmpeg, conforme descrito acima. Continuo buscando soluções.
