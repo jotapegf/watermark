@@ -1,31 +1,50 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'image_state.dart';
 import 'video_state.dart';
 
-class MyHomePage extends StatelessWidget {
+class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
 
   final String title;
 
   @override
+  _MyHomePageState createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  File? _watermarkImage; // Estado para armazenar a imagem da marca d'água
+
+  // Função para atualizar a imagem da marca d'água
+  void _updateWatermarkImage(File? image) {
+    setState(() {
+      _watermarkImage = image;
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        title: Text(widget.title),
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(title),
       ),
       body: Center(
         child: SingleChildScrollView(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
+              const SizedBox(height: 20),
               const Text("Escolha uma marca d'água para seu vídeo"),
               const SizedBox(height: 20),
-              ImageState(),
-              // Componente que gerencia a seleção de imagem
+              ImageState(
+                onImageSelected: _updateWatermarkImage,
+              ),
               const SizedBox(height: 20),
-              VideoState(),
-              // Componente que gerencia a gravação e reprodução de vídeo
+              VideoState(
+                watermarkImage:
+                    _watermarkImage,
+              ),
             ],
           ),
         ),

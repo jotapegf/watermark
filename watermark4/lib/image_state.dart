@@ -3,16 +3,18 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
 class ImageState extends StatefulWidget {
-  const ImageState({super.key});
+  final Function(File?) onImageSelected; // Função de callback
+
+  const ImageState({super.key, required this.onImageSelected});
 
   @override
   _ImageState createState() => _ImageState();
 }
 
 class _ImageState extends State<ImageState> {
-  File? _image; // Variável para armazenar a imagem selecionada
+  File? _image;
 
-  // Função para selecionar uma foto da galeria
+
   Future<void> _pickImage() async {
     final pickedFile =
     await ImagePicker().pickImage(source: ImageSource.gallery);
@@ -22,6 +24,8 @@ class _ImageState extends State<ImageState> {
     setState(() {
       _image = File(pickedFile.path);
     });
+
+    widget.onImageSelected(_image); // Comunica a imagem selecionada para o pai
   }
 
   @override
