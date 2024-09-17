@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
 class ImageState extends StatefulWidget {
-  final Function(File?) onImageSelected; // Função de callback
+  final Function(File?) onImageSelected;
 
   const ImageState({super.key, required this.onImageSelected});
 
@@ -14,10 +14,9 @@ class ImageState extends StatefulWidget {
 class _ImageState extends State<ImageState> {
   File? _image;
 
-
   Future<void> _pickImage() async {
     final pickedFile =
-    await ImagePicker().pickImage(source: ImageSource.gallery);
+        await ImagePicker().pickImage(source: ImageSource.gallery);
 
     if (pickedFile == null) return;
 
@@ -32,15 +31,18 @@ class _ImageState extends State<ImageState> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        _image != null
+        (_image != null)
             ? CircleAvatar(
-          radius: 40,
-          backgroundImage: FileImage(_image!),
-        )
-            : const CircleAvatar(
-          radius: 40,
-          child: Icon(Icons.add_box),
-        ),
+                radius: 40,
+                backgroundImage: FileImage(_image!),
+              )
+            : GestureDetector(
+                onTap: _pickImage,
+                child: const CircleAvatar(
+                  radius: 40,
+                  child: Icon(Icons.add_box),
+                ),
+              ),
         const SizedBox(height: 20),
         ElevatedButton(
           onPressed: _pickImage,

@@ -81,7 +81,7 @@ class _VideoState extends State<VideoState> {
     });
 
     try {
-      // Obter diretorio temporario para salvar o video processado
+      // Obtem diretorio temporario para salvar o video processado
       final Directory tempDir = await getTemporaryDirectory();
       final String outputPath =
           '${tempDir.path}/watermarked_${DateTime.now().millisecondsSinceEpoch}.mp4';
@@ -107,17 +107,17 @@ class _VideoState extends State<VideoState> {
         );
       } else if (ReturnCode.isCancel(returnCode)) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Processo cancelado')),
+          const SnackBar(content: Text("Processo cancelado")),
         );
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Erro ao adicionar a marca d\'água')),
+          const SnackBar(content: Text("Erro ao adicionar a marca d'água")),
         );
       }
     } catch (e) {
-      print('Erro ao processar vídeo: $e');
+      print("Erro ao processar vídeo: $e");
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Erro inesperado ao processar o vídeo')),
+        const SnackBar(content: Text("Erro inesperado ao processar o vídeo")),
       );
     } finally {
       setState(() {

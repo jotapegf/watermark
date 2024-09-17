@@ -13,9 +13,8 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  File? _watermarkImage; // Estado para armazenar a imagem da marca d'água
+  File? _watermarkImage;
 
-  // Função para atualizar a imagem da marca d'água
   void _updateWatermarkImage(File? image) {
     setState(() {
       _watermarkImage = image;
@@ -42,6 +41,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               const SizedBox(height: 20),
               VideoState(
+                key: const ValueKey('video_state'),
                 watermarkImage:
                     _watermarkImage,
               ),
