@@ -24,7 +24,7 @@ class _VideoState extends State<VideoState> {
 
   Future<void> _pickVideo() async {
     final pickedVideo =
-        await ImagePicker().pickVideo(source: ImageSource.camera);
+        await ImagePicker().pickVideo(source: ImageSource.camera, maxDuration: const Duration(seconds: 10),);
 
     if (pickedVideo == null) {
       return;
@@ -81,13 +81,13 @@ class _VideoState extends State<VideoState> {
     });
 
     try {
-      // Obter diretório temporário para salvar o vídeo processado
+      // Obter diretorio temporario para salvar o video processado
       final Directory tempDir = await getTemporaryDirectory();
       final String outputPath =
           '${tempDir.path}/watermarked_${DateTime.now().millisecondsSinceEpoch}.mp4';
 
-      // Comando FFmpeg para redimensionar e adicionar a marca d'água
-      // Este comando redimensiona a marca d'água para 25% da largura do vídeo
+      // Comando FFmpeg para redimensionar e adicionar a marca d'agua
+      // redimensiona a marca d'agua para 25% da largura do vídeo
       // e a posiciona no canto inferior direito com uma margem de 10 pixels
       String ffmpegCommand = '-i "${_video!.path}" -i "${widget.watermarkImage!.path}" '
           '-filter_complex "[1:v]scale=iw*0.25:-1[wm];[0:v][wm]overlay=W-w-10:H-h-10" '
